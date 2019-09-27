@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,14 @@ namespace project20190927
             this.LegutolsoLicitIdeje = legutolsoLicitIdeje;
             this.Elkelt = elkelt;
         }
+
+        public Festmeny(string cim, string festo, string stilus)
+        {
+            this.cim = cim;
+            this.festo = festo;
+            this.stilus = stilus;
+        }
+
         public void Kiir()
         {
             Console.WriteLine(this.festo+": "+this.cim+"("+this.stilus+")");
@@ -47,10 +56,20 @@ namespace project20190927
             }
             Console.WriteLine(this.legmagasabbLicit + "$ - " + this.legutolsoLicitIdeje + "(összesen: " + this.licitekSzama + " db)");
         } 
-        public void Beolvas()
+        public static List<Festmeny> beolvas()
         {
 
+            string [] festmeny = File.ReadAllLines("festmenyek.csv",Encoding.UTF8);
+            List<Festmeny> lista = new List<Festmeny>(); 
+            foreach (var f in festmeny)
+            {       
+                string[] tomb = f.Split(';');
+                Festmeny fe = new Festmeny(tomb[0], tomb[1], tomb[2]);
+                lista.Add(fe);
 
+            }
+            return lista;
+            
         }
     }
 }
