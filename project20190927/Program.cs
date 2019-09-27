@@ -10,6 +10,7 @@ namespace project20190927
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
